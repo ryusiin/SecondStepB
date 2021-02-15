@@ -1,0 +1,32 @@
+[
+   {
+      "id":1000,
+      "name":"푸른 물",
+      "type":100,
+      "duration":7,
+      "range":-1,
+      "effective_status":1,
+      "effective_value":20,
+      "effect_type":10
+   },
+   {
+      "id":1001,
+      "name":"유일한 빛",
+      "type":101,
+      "duration":-1,
+      "range":3,
+      "effective_status":1,
+      "effective_value":300,
+      "effect_type":11
+   },
+   {
+      "id":1002,
+      "name":"플라토닉 러브",
+      "type":102,
+      "duration":3,
+      "range":1,
+      "effective_status":1,
+      "effective_value":30,
+      "effect_type":12
+   }
+]
