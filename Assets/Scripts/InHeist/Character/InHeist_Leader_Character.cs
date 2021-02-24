@@ -40,6 +40,8 @@ public class InHeist_Leader_Character : MonoBehaviour
 
     // :: Constant
     const int ADD_MANA = 30;
+    const float MIN_DAMAGE_PERSENT = 0.7f;
+    const float MAX_DAMAGE_PERSENT = 1.3f;
 
     // :: Sing
     private PVPBattle_Sing_DataController DATAController;
@@ -109,12 +111,12 @@ public class InHeist_Leader_Character : MonoBehaviour
     // : Show
     private void ShowResetCharacter()
     {
-        this.CHARACTERHolder.character_1000.SetActive(false);
-        this.CHARACTERHolder.character_1001.SetActive(false);
-        this.CHARACTERHolder.character_1002.SetActive(false);
-        this.CHARACTERHolder.character_1010.SetActive(false);
-        this.CHARACTERHolder.character_1011.SetActive(false);
-        this.CHARACTERHolder.character_1012.SetActive(false);
+        this.CHARACTERHolder.character_1.SetActive(false);
+        this.CHARACTERHolder.character_2.SetActive(false);
+        this.CHARACTERHolder.character_3.SetActive(false);
+        this.CHARACTERHolder.character_4.SetActive(false);
+        this.CHARACTERHolder.character_5.SetActive(false);
+        this.CHARACTERHolder.character_6.SetActive(false);
     }
     private void ShowCharacter(EnumAll.eCharacter characterType)
     {
@@ -125,22 +127,22 @@ public class InHeist_Leader_Character : MonoBehaviour
         switch (characterType)
         {
             case EnumAll.eCharacter.SAKIRI:
-                this.currentCharacter = this.CHARACTERHolder.character_1000;
+                this.currentCharacter = this.CHARACTERHolder.character_1;
                 break;
             case EnumAll.eCharacter.AHURA:
-                this.currentCharacter = this.CHARACTERHolder.character_1001;
+                this.currentCharacter = this.CHARACTERHolder.character_2;
                 break;
             case EnumAll.eCharacter.HARU:
-                this.currentCharacter = this.CHARACTERHolder.character_1002;
+                this.currentCharacter = this.CHARACTERHolder.character_3;
                 break;
             case EnumAll.eCharacter.AMY:
-                this.currentCharacter = this.CHARACTERHolder.character_1010;
+                this.currentCharacter = this.CHARACTERHolder.character_4;
                 break;
             case EnumAll.eCharacter.RAJESH:
-                this.currentCharacter = this.CHARACTERHolder.character_1011;
+                this.currentCharacter = this.CHARACTERHolder.character_5;
                 break;
             case EnumAll.eCharacter.ARSENE:
-                this.currentCharacter = this.CHARACTERHolder.character_1012;
+                this.currentCharacter = this.CHARACTERHolder.character_6;
                 break;
         }
 
@@ -238,6 +240,10 @@ public class InHeist_Leader_Character : MonoBehaviour
     {
         return this.teamColor;
     }
+    public int GetCost()
+    {
+        return PVPBattle_Sing_DataController.Instance().DictCharacterData[(int)this.characterType].cost;
+    }
     public int GetAttackRange()
     {
         return this.currentCharacter_Data.atk_range;
@@ -319,6 +325,14 @@ public class InHeist_Leader_Character : MonoBehaviour
     public void SetCurrentHP()
     {
         hpSlider.DOValue(currentCharacter_CurHP, 0.2f);
+    }
+    public void SetTeam(EnumAll.eTeam eTeam)
+    {
+        this.teamColor = eTeam;
+    }
+    public void SetCharacter(EnumAll.eCharacter eCharacter)
+    {
+        this.characterType = eCharacter;
     }
 
     // :: Move
@@ -745,9 +759,10 @@ public class InHeist_Leader_Character : MonoBehaviour
     }
 
     // : Damage
-    public void Damaged(float damage)
+    public void Damaged(float rawDamage)
     {
-        this.AddHP(-(int)damage);
+        int damage = this.GetRandomDamage(rawDamage);
+        this.AddHP(-damage);
 
         // :: GAME OVER
         if (this.currentCharacter_CurHP <= 0)
@@ -757,6 +772,10 @@ public class InHeist_Leader_Character : MonoBehaviour
         }
 
         this.ShowEffect(EnumAll.eEffect.HIT);
+    }
+    private int GetRandomDamage(float damage)
+    {
+        return (int)Random.Range(damage * MIN_DAMAGE_PERSENT, damage * MAX_DAMAGE_PERSENT);
     }
 
     // : Shoot

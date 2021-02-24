@@ -74,6 +74,9 @@ public class Lobby_Ruler : MonoBehaviour
     {
         this.UIChief.AddButtonListener_Heist(() =>
         {
+            // :: Dis
+            this.UIChief.CanButton_Heist(false);
+
             // :: Connect
             this.PHOTONManager.Callback_Connected = () =>
             {

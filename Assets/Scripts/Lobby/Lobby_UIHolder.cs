@@ -8,6 +8,7 @@ public class Lobby_UIHolder : MonoBehaviour
     public GameObject BUTTON_profile;
     public GameObject BUTTON_stage;
     public GameObject BUTTON_heist;
+    public GameObject IMAGE_buttonHeist;
     public GameObject IMAGE_dim;
 
     // : Initialise

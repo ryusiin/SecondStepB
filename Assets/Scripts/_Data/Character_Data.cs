@@ -13,4 +13,5 @@ public class Character_Data
     public int atk_range;
     public int required_mp;
     public int skill_id;
+    public int cost;
 }

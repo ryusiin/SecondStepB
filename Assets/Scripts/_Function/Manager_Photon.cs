@@ -49,7 +49,12 @@ public class Manager_Photon : MonoBehaviourPunCallbacks
     private IEnumerator LoadCompleteImplement(System.Action action)
     {
         while (PhotonNetwork.LevelLoadingProgress < 1)
+        {
             yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+
         action?.Invoke();
     }
 
@@ -170,6 +175,7 @@ public class Manager_Photon : MonoBehaviourPunCallbacks
     private void RPCInit_InHeist()
     {
         InHeist_Ruler ruler = GameObject.FindObjectOfType<InHeist_Ruler>();
+
         ruler.Init();
         RPCManager.Init_InHeist();
     }

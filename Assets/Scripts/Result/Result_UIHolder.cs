@@ -7,6 +7,7 @@ public class Result_UIHolder : MonoBehaviour
     // : Assign
     public GameObject Button_ok;
     public GameObject IMAGE_dim;
+    public GameObject TEXT_result;
 
     // : Initialise
     public void Init()

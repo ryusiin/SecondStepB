@@ -28,6 +28,12 @@ public class Result_UIChief : MonoBehaviour
         });
     }
 
+    // : Set
+    public void SetText_Result(string result)
+    {
+        this.UIHolder.TEXT_result.GetComponent<Text>().text = result;
+    }
+
     // : Get
     public Image GetImage_Dim()
     {

@@ -30,11 +30,26 @@ public class InHeist_UIChief : MonoBehaviour
     {
         this.UIHolder.BUTTNON_startBattle.SetActive(check);
     }
+    public void ShowImage_CostAll(bool check)
+    {
+        this.GetImage_Cost(EnumAll.eTeam.RED).gameObject.SetActive(check);
+        this.GetImage_Cost(EnumAll.eTeam.BLUE).gameObject.SetActive(check);
+    }
 
     // : Get
     public Image GetImage_Dim()
     {
         return this.UIHolder.IMAGE_dim.GetComponent<Image>();
+    }
+    public Image GetImage_Cost(EnumAll.eTeam eTeam)
+    {
+        if (eTeam == EnumAll.eTeam.RED)
+            return this.UIHolder.IMAGE_costRed.GetComponent<Image>();
+
+        if (eTeam == EnumAll.eTeam.BLUE)
+            return this.UIHolder.IMAGE_costBlue.GetComponent<Image>();
+
+        return null;
     }
 
     // : Set
@@ -44,8 +59,21 @@ public class InHeist_UIChief : MonoBehaviour
     }
     public void SetTeam(EnumAll.eTeam eTeam, string nickname)
     {
+        // :: Cost
+        this.ShowImage_CostAll(false);
+        this.GetImage_Cost(eTeam).gameObject.SetActive(true);
+
+        // :: Team and Nickname
         this.UIHolder.IMAGE_team.GetComponent<Image>().color = Dictator.GetColor(eTeam);
         this.UIHolder.TEXT_nickname.GetComponent<Text>().color = Dictator.GetColor(eTeam);
         this.UIHolder.TEXT_nickname.GetComponent<Text>().text = nickname;
+    }
+    public void SetText_Cost(EnumAll.eTeam eTeam, int curCost, int maxCost)
+    {
+        string cost = string.Format("{0}/{1}", curCost, maxCost);
+        if (eTeam == EnumAll.eTeam.BLUE)
+            this.UIHolder.TEXT_costBlue.GetComponent<Text>().text = cost;
+        else if (eTeam == EnumAll.eTeam.RED)
+            this.UIHolder.TEXT_costRed.GetComponent<Text>().text = cost;
     }
 }

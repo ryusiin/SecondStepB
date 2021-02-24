@@ -30,6 +30,7 @@ public class Dictator : MonoBehaviour
     // : Status
     public static string Nickname { get; set; }
     public static EnumAll.eTeam eTeam = EnumAll.eTeam.YELLOW;
+    public static EnumAll.eResult eResult = EnumAll.eResult.LOSE;
     public static Color GetColor(EnumAll.eTeam eTeam)
     {
         switch(eTeam)
@@ -134,8 +135,6 @@ public class Dictator : MonoBehaviour
                             {
                                 this.LoadScene(scene);
                             };
-                            PhotonNetwork.LeaveRoom();
-                            PhotonNetwork.Disconnect();
                         }
                     };
                 }

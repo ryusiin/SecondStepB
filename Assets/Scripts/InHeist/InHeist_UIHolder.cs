@@ -9,6 +9,11 @@ public class InHeist_UIHolder : MonoBehaviour
     public GameObject IMAGE_dim;
     public GameObject TEXT_nickname;
     public GameObject TEXT_remainingTime;
+    [Header("Cost")]
+    public GameObject IMAGE_costRed;
+    public GameObject TEXT_costRed;
+    public GameObject IMAGE_costBlue;
+    public GameObject TEXT_costBlue;
 
     // :: Initialise
     public void Init()

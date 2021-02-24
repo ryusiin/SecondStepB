@@ -94272,12 +94272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e39e44ee4ce5549bb8c88e02ddccdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character_1000: {fileID: 7589845349230616310}
-  character_1001: {fileID: 833030548172931754}
-  character_1002: {fileID: 8247432883320295352}
-  character_1010: {fileID: 319341220697472125}
-  character_1011: {fileID: 2814094402102657625}
-  character_1012: {fileID: 6262811573447998467}
+  character_1: {fileID: 7589845349230616310}
+  character_2: {fileID: 833030548172931754}
+  character_3: {fileID: 8247432883320295352}
+  character_4: {fileID: 319341220697472125}
+  character_5: {fileID: 2814094402102657625}
+  character_6: {fileID: 6262811573447998467}
   EFFECT_position: {fileID: 7354037308627808501}
   EFFECT_heal: {fileID: 6772755911039803557}
   EFFECT_curse: {fileID: 7176656926823177416}

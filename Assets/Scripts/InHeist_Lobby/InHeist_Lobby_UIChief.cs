@@ -40,7 +40,7 @@ public class InHeist_Lobby_UIChief : MonoBehaviour
     }
 
     // : Able
-    public void AbleButton_Heist(bool check)
+    public void CanButton_Heist(bool check)
     {
         this.UIHolder.Button_heist.GetComponent<Button>().interactable = check;
     }

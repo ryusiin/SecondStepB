@@ -5,18 +5,18 @@ using UnityEngine;
 public class InHeist_Holder_Character : MonoBehaviour
 {
     // :: Characters
-    [Header("Character : 1000 / SAKIRI")]
-    public GameObject character_1000;
-    [Header("Character : 1001 / AHURA")]
-    public GameObject character_1001;
-    [Header("Character : 1002 / HARU")]
-    public GameObject character_1002;
-    [Header("Character : 1010 / AMY")]
-    public GameObject character_1010;
-    [Header("Character : 1011 / RAJESH")]
-    public GameObject character_1011;
-    [Header("Character : 1012 / ARSENE")]
-    public GameObject character_1012;
+    [Header("Character : 1 / SAKIRI")]
+    public GameObject character_1;
+    [Header("Character : 2 / AHURA")]
+    public GameObject character_2;
+    [Header("Character : 3 / HARU")]
+    public GameObject character_3;
+    [Header("Character : 4 / AMY")]
+    public GameObject character_4;
+    [Header("Character : 5 / RAJESH")]
+    public GameObject character_5;
+    [Header("Character : 6 / ARSENE")]
+    public GameObject character_6;
     [Header("Effect")]
     public GameObject EFFECT_position;
     public GameObject EFFECT_heal;
@@ -33,12 +33,12 @@ public class InHeist_Holder_Character : MonoBehaviour
     public void Init()
     {
         Dictator.Check_Null(this.ToString(),
-            this.character_1000,
-            this.character_1001,
-            this.character_1002,
-            this.character_1010,
-            this.character_1011,
-            this.character_1012,
+            this.character_1,
+            this.character_2,
+            this.character_3,
+            this.character_4,
+            this.character_5,
+            this.character_6,
             this.EFFECT_position,
             this.EFFECT_heal,
             this.EFFECT_curse,

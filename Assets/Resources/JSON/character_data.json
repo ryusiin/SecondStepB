@@ -8,7 +8,8 @@
       "moving_speed":1.5,
       "atk_range":2,
       "required_mp":60,
-      "skill_id":1000
+      "skill_id":1000,
+      "cost":1
    },
    {
       "id":2,
@@ -19,7 +20,8 @@
       "moving_speed":1,
       "atk_range":1,
       "required_mp":140,
-      "skill_id":1001
+      "skill_id":1001,
+      "cost":1
    },
    {
       "id":3,
@@ -30,7 +32,8 @@
       "moving_speed":0.8,
       "atk_range":1,
       "required_mp":80,
-      "skill_id":1002
+      "skill_id":1002,
+      "cost":1
    },
    {
       "id":4,
@@ -41,7 +44,8 @@
       "moving_speed":1.5,
       "atk_range":1,
       "required_mp":60,
-      "skill_id":1000
+      "skill_id":1000,
+      "cost":1
    },
    {
       "id":5,
@@ -52,7 +56,8 @@
       "moving_speed":1,
       "atk_range":2,
       "required_mp":140,
-      "skill_id":1001
+      "skill_id":1001,
+      "cost":2
    },
    {
       "id":6,
@@ -63,6 +68,7 @@
       "moving_speed":0.8,
       "atk_range":1,
       "required_mp":80,
-      "skill_id":1002
+      "skill_id":1002,
+      "cost":1
    }
 ]

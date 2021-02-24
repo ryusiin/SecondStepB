@@ -18,6 +18,7 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
 
     // : Chief
     private InHeist_Lobby_UIChief UIChief;
+    private InHeist_Lobby_GOChief GOChief;
     private InHeist_Lobby_MULTIChief MULTIChief;
 
     // : Function
@@ -37,6 +38,8 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
         // :: Chief
         this.UIChief = GameObject.FindObjectOfType<InHeist_Lobby_UIChief>();
         this.UIChief.Init();
+        this.GOChief = GameObject.FindObjectOfType<InHeist_Lobby_GOChief>();
+        this.GOChief.Init();
         this.MULTIChief = this.GetComponent<InHeist_Lobby_MULTIChief>();
         this.MULTIChief.Init();
 
@@ -47,6 +50,7 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
         this.DIMManager = new Manager_Dim(this.UIChief.GetImage_Dim());
 
         // :: Scenario
+        this.Scenario_ShowRandomCharacter();
         this.Scenario_JoinRoom();
 
         // :: Button Scenario
@@ -61,6 +65,16 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
     }
 
     // : Scenario
+    private void Scenario_ShowRandomCharacter()
+    {
+        this.GOChief.ShowCharacter_All(false);
+
+        // :: Amy(1010) to Arsene(1012)
+        int startCharacter = (int)EnumAll.eCharacter.AMY;
+        int endCharacter = (int)EnumAll.eCharacter.ARSENE;
+        EnumAll.eCharacter charcter = (EnumAll.eCharacter)Random.Range(startCharacter, endCharacter);
+        this.GOChief.ShowCharacter(charcter);
+    }
     private void Scenario_JoinRoom()
     {
         this.PHOTONManager.Callback_Joined = () =>
@@ -89,14 +103,15 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
             {
                 this.UIChief.Show_Flag(EnumAll.eTeam.RED, true);
                 this.UIChief.Show_Flag(EnumAll.eTeam.BLUE, false);
-                this.UIChief.AbleButton_Heist(false);
-                // :::: TEST
-                this.UIChief.AbleButton_Heist(true);
+                this.UIChief.CanButton_Heist(false);
+                
+                // :::: Single TEST
+                //this.UIChief.CanButton_Heist(true);
             } else if(playerCount >= 2)
             {
                 this.UIChief.Show_Flag(EnumAll.eTeam.RED, true);
                 this.UIChief.Show_Flag(EnumAll.eTeam.BLUE, true);
-                this.UIChief.AbleButton_Heist(true);
+                this.UIChief.CanButton_Heist(true);
             }
 
             yield return new WaitForSeconds(1f);
@@ -108,6 +123,7 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
     {
         this.UIChief.AddButtonListener_Heist(() =>
         {
+            this.UIChief.CanButton_Heist(false);
             this.StopCoroutine(this.waitCoroutine);
 
             // :: Change Scene

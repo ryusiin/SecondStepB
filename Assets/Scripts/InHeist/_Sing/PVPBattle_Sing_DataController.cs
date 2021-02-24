@@ -35,7 +35,7 @@ public class PVPBattle_Sing_DataController
 
         // :: Data
         string jsonCharacter = Resources.Load<TextAsset>("JSON/character_data").text;
-        this.DictCharacterData = JsonConvert.DeserializeObject<Character_Data[]>(jsonCharacter).ToDictionary(ele => ele.model_type);
+        this.DictCharacterData = JsonConvert.DeserializeObject<Character_Data[]>(jsonCharacter).ToDictionary(ele => ele.id);
     }
     public Dictionary<int, Skill_Data> DictSkillData { get; private set; }
     private void LoadJSON_Skill()

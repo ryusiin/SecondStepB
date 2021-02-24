@@ -26,6 +26,19 @@ public class Lobby_UIChief : MonoBehaviour
         this.UIHolder.BUTTON_heist.GetComponent<Button>().onClick.AddListener(() => { action?.Invoke(); });
     }
 
+    // : Dis
+    public void CanButton_Heist(bool check)
+    {
+        this.UIHolder.BUTTON_heist.GetComponent<Button>().interactable = check;
+
+        Image buttonHeist = this.UIHolder.IMAGE_buttonHeist.GetComponent<Image>();
+        Color buttonColor = buttonHeist.color;
+        if (check)
+            buttonHeist.color = new Color(buttonColor.r, buttonColor.g, buttonColor.b, 1f);
+        else
+            buttonHeist.color = new Color(buttonColor.r, buttonColor.g, buttonColor.b, 0.5f);
+    }
+
     // : Fade
     public void Fade_Dim(float endValue, float duration, System.Action action = null)
     {

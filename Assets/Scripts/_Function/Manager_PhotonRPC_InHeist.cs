@@ -20,6 +20,7 @@ public class Manager_PhotonRPC_InHeist : MonoBehaviourPunCallbacks
 
     // : Status
     private Vector3 ADJUSTMENT_POSITION = new Vector3(0, 0.25f, 0);
+    const int COUNT_DOWN = 20;
 
     // : Init
     [PunRPC]
@@ -34,7 +35,7 @@ public class Manager_PhotonRPC_InHeist : MonoBehaviourPunCallbacks
 
         // :: Start Count Down
         if(PhotonNetwork.IsMasterClient)
-            this.Do_CountDown(15);
+            this.Do_CountDown(COUNT_DOWN);
     }
 
     // : Do
@@ -90,11 +91,15 @@ public class Manager_PhotonRPC_InHeist : MonoBehaviourPunCallbacks
     public void Win(EnumAll.eTeam eTeam)
     {
         Dictator.Debug_All(this.ToString(), string.Format("{0} Win!", eTeam));
+        Dictator.eResult = Dictator.eTeam == eTeam ? EnumAll.eResult.WIN : EnumAll.eResult.LOSE;
         this.DIMManager.Show(true);
+        
         this.StartCoroutine(this.WaitAndDo(() => {
             this.DIMManager.Fade(1f, 1f, () =>
             {
+                DOTween.KillAll(true);
                 this.Dictator.LoadScene(EnumAll.eScene.RESULT);
+                PhotonNetwork.Disconnect();
             });
         }));
     }

@@ -6,12 +6,12 @@ public class EnumAll
 {
     public enum eCharacter
     {
-        SAKIRI = 1000,
-        AHURA = 1001,
-        HARU = 1002,
-        AMY = 1010,
-        RAJESH = 1011,
-        ARSENE = 1012
+        SAKIRI = 1,
+        AHURA = 2,
+        HARU = 3,
+        AMY = 4,
+        RAJESH = 5,
+        ARSENE = 6
     }
 
     public enum eScene
@@ -48,6 +48,12 @@ public class EnumAll
         BEAM = 11,
         CURSE = 12,
         HIT = 13,
+    }
+
+    public enum eResult
+    {
+        LOSE = 0,
+        WIN = 1
     }
 
     public enum eTeam

@@ -8,7 +8,6 @@ public class InHeist_Ruler : MonoBehaviour
 {
     // : Development
     public bool DoTest = false;
-    public EnumAll.eTeam testTeam;
 
     // : 0 Awake
     private void Awake()
@@ -35,10 +34,13 @@ public class InHeist_Ruler : MonoBehaviour
     private Manager_Dim DIMManager;
 
     // :: Status
+    public static int curCost = 0;
+    // :: Status : Const
     private Vector3 ADJUSTMENT_POSITION = new Vector3(0, 0.25f, 0);
     const float DIM_DURATION = 1f;
     const float FADE_OUT = 0f;
     const float FADE_IN = 1f;
+    const int MAX_COST = 5;
 
     // : Please
     public System.Action<EnumAll.eScene> Please_MoveScene;
@@ -75,6 +77,10 @@ public class InHeist_Ruler : MonoBehaviour
         // :: Do Scenario
         this.Scenario_Start(Dictator.eTeam);
 
+        // :: Set Cost
+        curCost = 0;
+        this.UIChief.SetText_Cost(Dictator.eTeam, curCost, MAX_COST);
+
         // :: Complete
         Dictator.Debug_Init(this.ToString());
 
@@ -88,13 +94,23 @@ public class InHeist_Ruler : MonoBehaviour
     {
         this.RPCManager.Please_MoveScene = this.Please_MoveScene;
     }
+    public void SetCost_Up(int cost)
+    {
+        curCost += cost;
+        this.UIChief.SetText_Cost(Dictator.eTeam, curCost, MAX_COST);
+    }
+
+    // : Get
+    public static int Get_MaxCost()
+    {
+        return MAX_COST;
+    }
 
     // : Scenario
     private bool check_GameOver = false;
     private void Scenario_Start(EnumAll.eTeam eTeam)
     {
-        Debug.LogFormat("::::::::::::::: {0} 테스트 중 이곳 수정할 것", this.ToString());
-        //this.GOChief.ShowShowcase(eTeam);
+        this.GOChief.ShowShowcase(eTeam);
 
         // :: Show
         this.MAPActivist.Show_AllHexImage(false);
@@ -129,20 +145,36 @@ public class InHeist_Ruler : MonoBehaviour
         List<InHeist_Leader_Character> listBlueTeam = this.MAPActivist.GetTeam(EnumAll.eTeam.BLUE);
         List<InHeist_Leader_Tile> listEmptyTiles = this.MAPActivist.GetEmptyTile();
 
-        // :: Random Order
-        int rand = Random.Range(0, 2);
+        // :: Set When Empty
+        if(listBlueTeam.Count < 1)
+        {
+            Debug.Log("blue");
+            InHeist_Class_Character character = 
+                new InHeist_Class_Character(EnumAll.eCharacter.AMY, EnumAll.eTeam.BLUE);
 
-        // :: Do
-        if (rand == 0)
+            this.SetChampion_New(character, new Vector3(2, -9, 7));
+            listBlueTeam = this.MAPActivist.GetTeam(EnumAll.eTeam.BLUE);
+        }
+        if(listRedTeam.Count < 1)
+        {
+            Debug.Log("red");
+            InHeist_Class_Character character =
+                new InHeist_Class_Character(EnumAll.eCharacter.AMY, EnumAll.eTeam.RED);
+
+            this.SetChampion_New(character, new Vector3(0, 0, 0));
+            listRedTeam = this.MAPActivist.GetTeam(EnumAll.eTeam.RED);
+        }
+
+        this.StartCoroutine(this.WaitAndDo(() =>
         {
             this.AutoBattle(listRedTeam);
             this.AutoBattle(listBlueTeam);
-        }
-        else
-        {
-            this.AutoBattle(listBlueTeam);
-            this.AutoBattle(listRedTeam);
-        }
+        }));
+    }
+    private IEnumerator WaitAndDo(System.Action action)
+    {
+        yield return new WaitForSeconds(1f);
+        action?.Invoke();
     }
 
     // : Add Button Scenario
@@ -179,11 +211,21 @@ public class InHeist_Ruler : MonoBehaviour
     {
         this.DRAGActivist.Please_SetNewChampion = (characterStatus, tile) =>
         {
-            string guid = System.Guid.NewGuid().ToString();
-
-            // :: RPC
-            this.PHOTONManager.RPC_Set_NewCharacter(characterStatus.CharacterType, characterStatus.Team, tile.Coordinate, guid);
+            this.SetChampion_New(characterStatus, tile.Coordinate);
         };
+    }
+    private void SetChampion_New(InHeist_Class_Character characterStatus, Vector3 tileCoord)
+    {
+        int characterID = (int)characterStatus.CharacterType;
+        int characterCost = this.DataController.DictCharacterData[characterID].cost;
+        // :: Cost Up
+        this.SetCost_Up(characterCost);
+
+        // :: GUID
+        string guid = System.Guid.NewGuid().ToString();
+
+        // :: RPC
+        this.PHOTONManager.RPC_Set_NewCharacter(characterStatus.CharacterType, characterStatus.Team, tileCoord, guid);
     }
     private void Answer_SetChampion()
     {

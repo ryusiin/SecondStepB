@@ -35,7 +35,10 @@ public class InHeist_Activist_Drag : MonoBehaviour
         // :: 마우스 클릭
         if (Input.GetMouseButtonDown(0))
         {
-            this.RayCastToChampion(); // :: 레이캐스트
+            int maxCost = InHeist_Ruler.Get_MaxCost();
+            int curCost = InHeist_Ruler.curCost;
+            if (curCost < maxCost)
+                this.RayCastToChampion(); // :: 레이캐스트
         }
 
         // :: Drag Start
@@ -67,15 +70,26 @@ public class InHeist_Activist_Drag : MonoBehaviour
 
         if(Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, layerMask))
         {
-            EnumAll.eTeam characterTeam = hit.transform.GetComponent<InHeist_Leader_Character>().GetTeamColor();
-            Debug.LogFormat("::::::::::::::: {0} 테스트 중 이곳 수정할 것", this.ToString());
-            //if (characterTeam == Dictator.eTeam)
-            if(true)
-            {
-                this.onDrag = true; // :: 드래그 시작
-                this.onChamp = hit.transform; // :: 현재 챔피언 저장
-                this.onChampFirstPosition = this.onChamp.transform.position; // :: 원래 위치 저장
-            }
+            InHeist_Leader_Character character = hit.transform.GetComponent<InHeist_Leader_Character>();
+            
+            // :: Check Team
+            EnumAll.eTeam characterTeam = character.GetTeamColor();
+            if (characterTeam != Dictator.eTeam)
+                return;
+
+            // :: Check Cost
+            int characterCost = character.GetCost();
+            int curCost = InHeist_Ruler.curCost;
+            int maxCost = InHeist_Ruler.Get_MaxCost();
+            int remainCost = maxCost - curCost;
+            if (characterCost > remainCost)
+                return;
+
+            // :: Start Drag
+            this.onDrag = true; // :: 드래그 시작
+            this.onChamp = hit.transform; // :: 현재 챔피언 저장
+            this.onChampFirstPosition = this.onChamp.transform.position; // :: 원래 위치 저장
+            
         }
     }
 

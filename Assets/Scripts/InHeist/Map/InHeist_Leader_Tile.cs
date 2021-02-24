@@ -50,6 +50,10 @@ public class InHeist_Leader_Tile : MonoBehaviour
     {
         this.IMAGE_hex.GetComponent<SpriteRenderer>().color = Dictator.GetColor(eTeam);
     }
+    public void SetCoordinate(Vector3 coord)
+    {
+        this.Coordinate = coord;
+    }
 
     // :: Release Character
     public void ReleaseCharacter()
