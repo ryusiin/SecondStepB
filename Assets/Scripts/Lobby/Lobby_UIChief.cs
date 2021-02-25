@@ -25,6 +25,14 @@ public class Lobby_UIChief : MonoBehaviour
     {
         this.UIHolder.BUTTON_heist.GetComponent<Button>().onClick.AddListener(() => { action?.Invoke(); });
     }
+    public void AddButtonListener_OpenStory(System.Action action)
+    {
+        this.UIHolder.BUTTON_OpenStory.onClick.AddListener(() => { action?.Invoke(); });
+    }
+    public void AddButtonListener_StoryHeist(System.Action action)
+    {
+        this.UIHolder.BUTTON_StoryHeist.onClick.AddListener(() => { action?.Invoke(); });
+    }
 
     // : Dis
     public void CanButton_Heist(bool check)
@@ -52,6 +60,10 @@ public class Lobby_UIChief : MonoBehaviour
     public void Show_Dim(bool check)
     {
         this.UIHolder.IMAGE_dim.SetActive(check);
+    }
+    public void ShowButton_StoryHeist(bool check)
+    {
+        this.UIHolder.BUTTON_StoryHeist.gameObject.SetActive(check);
     }
 
     // : Get

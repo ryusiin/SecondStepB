@@ -54,6 +54,8 @@ public class Lobby_Ruler : MonoBehaviour
 
         // :: Button Scenario
         this.AddButtonScenario_Heist();
+        this.AddButtonScenario_OpenStory();
+        this.AddButtonScenario_StoryHeist();
 
         // :: Complete
         Dictator.Debug_Init(this.ToString());
@@ -86,6 +88,20 @@ public class Lobby_Ruler : MonoBehaviour
                 });
             };
             this.PHOTONManager.Try_Connect();
+        });
+    }
+    private void AddButtonScenario_OpenStory()
+    {
+        this.UIChief.AddButtonListener_OpenStory(() =>
+        {
+            this.UIChief.ShowButton_StoryHeist(true);
+        });
+    }
+    private void AddButtonScenario_StoryHeist()
+    {
+        this.UIChief.AddButtonListener_StoryHeist(() =>
+        {
+            this.UIChief.ShowButton_StoryHeist(false);
         });
     }
 }

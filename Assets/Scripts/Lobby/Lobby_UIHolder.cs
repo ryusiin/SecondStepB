@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Lobby_UIHolder : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Lobby_UIHolder : MonoBehaviour
     public GameObject BUTTON_profile;
     public GameObject BUTTON_stage;
     public GameObject BUTTON_heist;
+    public Button BUTTON_OpenStory;
+    public Button BUTTON_StoryHeist;
     public GameObject IMAGE_buttonHeist;
     public GameObject IMAGE_dim;
 
