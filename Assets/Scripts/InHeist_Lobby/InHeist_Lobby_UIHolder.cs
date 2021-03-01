@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InHeist_Lobby_UIHolder : MonoBehaviour
 {
     // : Assign
     public GameObject Button_heist;
+    public Button Button_Back;
     public GameObject Image_team;
     public GameObject Text_nickname;
     public GameObject Image_flagRed;

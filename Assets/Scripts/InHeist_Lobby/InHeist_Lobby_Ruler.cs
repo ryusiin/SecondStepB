@@ -55,6 +55,7 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
 
         // :: Button Scenario
         this.AddButtonScenario_Heist();
+        this.AddButtonScenario_Back();
 
         // :: Complete
         Dictator.Debug_Init(this.ToString());
@@ -105,7 +106,7 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
                 this.UIChief.Show_Flag(EnumAll.eTeam.BLUE, false);
                 this.UIChief.CanButton_Heist(false);
                 
-                // :::: Single TEST
+                // :::: ******* Single TEST
                 //this.UIChief.CanButton_Heist(true);
             } else if(playerCount >= 2)
             {
@@ -130,6 +131,18 @@ public class InHeist_Lobby_Ruler : MonoBehaviour
             this.MULTIChief.MoveScene_InHeist();
             //this.PHOTONManager.Load_Level(EnumAll.eScene.IN_HEIST);
             
+        });
+    }
+    private void AddButtonScenario_Back()
+    {
+        this.UIChief.AddButtonListener_Back(() =>
+        {
+            // :: Fade
+            this.DIMManager.Show(true);
+            this.DIMManager.Fade(FADE_IN, DIM_DURATION, () => {
+                Photon.Pun.PhotonNetwork.Disconnect();
+                this.Please_MoveScene(EnumAll.eScene.LOBBY);
+            });
         });
     }
 }

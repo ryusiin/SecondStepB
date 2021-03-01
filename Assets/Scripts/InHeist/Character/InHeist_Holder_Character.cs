@@ -5,12 +5,6 @@ using UnityEngine;
 public class InHeist_Holder_Character : MonoBehaviour
 {
     // :: Characters
-    [Header("Character : 1 / SAKIRI")]
-    public GameObject character_1;
-    [Header("Character : 2 / AHURA")]
-    public GameObject character_2;
-    [Header("Character : 3 / HARU")]
-    public GameObject character_3;
     [Header("Character : 4 / AMY")]
     public GameObject character_4;
     [Header("Character : 5 / RAJESH")]
@@ -33,9 +27,6 @@ public class InHeist_Holder_Character : MonoBehaviour
     public void Init()
     {
         Dictator.Check_Null(this.ToString(),
-            this.character_1,
-            this.character_2,
-            this.character_3,
             this.character_4,
             this.character_5,
             this.character_6,

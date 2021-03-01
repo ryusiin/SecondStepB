@@ -53,6 +53,13 @@ public class InHeist_Lobby_UIChief : MonoBehaviour
             action?.Invoke();
         });
     }
+    public void AddButtonListener_Back(System.Action action)
+    {
+        this.UIHolder.Button_Back.onClick.AddListener(() =>
+        {
+            action?.Invoke();
+        });
+    }
 
     // : Get
     public Image GetImage_Dim()

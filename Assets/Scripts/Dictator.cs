@@ -6,6 +6,12 @@ using Photon.Pun;
 
 public class Dictator : MonoBehaviour
 {
+    // :: Status : Audio
+    [Header("Audio")]
+    public AudioClip BGM_Base;
+    public AudioClip BGM_InHeist;
+    private AudioSource AUDIOPlyaer;
+
     // : 0 Awake
     private void Awake()
     {
@@ -17,6 +23,9 @@ public class Dictator : MonoBehaviour
         // :: Only
         DontDestroyOnLoad(this.gameObject);
 
+        // :: Audio
+        this.AUDIOPlyaer = this.GetComponent<AudioSource>();
+
         // :: Load Scene
         this.LoadScene(EnumAll.eScene.INTRO);
     }
@@ -24,7 +33,6 @@ public class Dictator : MonoBehaviour
     // : 1 Start
     private void Start()
     {
-
     }
 
     // : Status
@@ -67,6 +75,9 @@ public class Dictator : MonoBehaviour
                     {
                         if (loadScene.isDone)
                         {
+                            // :: Audio
+                            this.PlayAudio(BGM_Base);
+
                             var ruler = FindObjectOfType<Intro_Ruler>();
                             ruler.Init();
                             ruler.Please_MoveScene = (scene) =>
@@ -84,6 +95,9 @@ public class Dictator : MonoBehaviour
                     {
                         if (loadScene.isDone)
                         {
+                            // :: Audio
+                            this.PlayAudio(BGM_Base);
+
                             var ruler = FindObjectOfType<Lobby_Ruler>();
                             ruler.Init();
                             ruler.Please_MoveScene = (scene) =>
@@ -101,6 +115,9 @@ public class Dictator : MonoBehaviour
                     {
                         if (loadScene.isDone)
                         {
+                            // :: Audio
+                            this.PlayAudio(BGM_InHeist);
+
                             var ruler = FindObjectOfType<InHeist_Lobby_Ruler>();
                             ruler.Init();
                             ruler.Please_MoveScene = (scene) =>
@@ -129,6 +146,9 @@ public class Dictator : MonoBehaviour
                     {
                         if (loadScene.isDone)
                         {
+                            // :: Audio
+                            this.PlayAudio(BGM_Base);
+
                             var ruler = FindObjectOfType<Result_Ruler>();
                             ruler.Init();
                             ruler.Please_MoveScene = (scene) =>
@@ -140,6 +160,15 @@ public class Dictator : MonoBehaviour
                 }
                 break;
         }
+    }
+    private void PlayAudio(AudioClip clip)
+    {
+        if (this.AUDIOPlyaer.clip == clip)
+            return;
+
+        this.AUDIOPlyaer.Stop();
+        this.AUDIOPlyaer.clip = clip;
+        this.AUDIOPlyaer.Play();
     }
 
     // : Debug

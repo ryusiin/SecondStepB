@@ -111,9 +111,6 @@ public class InHeist_Leader_Character : MonoBehaviour
     // : Show
     private void ShowResetCharacter()
     {
-        this.CHARACTERHolder.character_1.SetActive(false);
-        this.CHARACTERHolder.character_2.SetActive(false);
-        this.CHARACTERHolder.character_3.SetActive(false);
         this.CHARACTERHolder.character_4.SetActive(false);
         this.CHARACTERHolder.character_5.SetActive(false);
         this.CHARACTERHolder.character_6.SetActive(false);
@@ -126,15 +123,6 @@ public class InHeist_Leader_Character : MonoBehaviour
         // :: Set
         switch (characterType)
         {
-            case EnumAll.eCharacter.SAKIRI:
-                this.currentCharacter = this.CHARACTERHolder.character_1;
-                break;
-            case EnumAll.eCharacter.AHURA:
-                this.currentCharacter = this.CHARACTERHolder.character_2;
-                break;
-            case EnumAll.eCharacter.HARU:
-                this.currentCharacter = this.CHARACTERHolder.character_3;
-                break;
             case EnumAll.eCharacter.AMY:
                 this.currentCharacter = this.CHARACTERHolder.character_4;
                 break;
